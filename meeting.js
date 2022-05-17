@@ -1,4 +1,4 @@
-const meeting = input => {
+const meeting0 = input => {
 
 	// All uppercase, 
 	// split by person and then again by first and last name, 
@@ -17,5 +17,13 @@ const meeting = input => {
 
 	return output;
 };
+
+const meeting = list => list
+	.toUpperCase()
+	.split(';')											// Split people
+	.map(name => name.split(':'))						// Split names
+	.map(([first, last]) => `(${last}, ${first})`)		// Reorder and encapsulate names
+	.sort()												// Sort lexicographically
+	.join('');
 
 console.log(meeting("Fred:Corwill;Wilfred:Corwill;Barney:Tornbull;Betty:Tornbull;Bjon:Tornbull;Raphael:Corwill;Alfred:Corwill"))
