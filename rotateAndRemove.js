@@ -19,7 +19,7 @@ const remove1 = array => {
 };
 const remove2 = array => array.filter(item => [...array].sort((a, b) => a - b).slice(1, -1).includes(item));
 
-const remove = array => array.filter((item, index) => [
+const remove = array => array.every(i => i === array[0]) ? array.slice(2) : array.filter((item, index) => [
 	array.indexOf(Math.min(...array)),
 	array.indexOf(Math.max(...array))
 ].indexOf(index) < 0);
@@ -27,6 +27,7 @@ const remove = array => array.filter((item, index) => [
 // console.log(remove([5, 8, 4, 5, 6])); // [5, 5, 6]
 // console.log(remove([6, 8, 4, 5, 5])); // [6, 5, 5]
 // console.log(remove([9, 2, 5, 8, 5, 2, 9])); // [5, 8, 5, 2, 9]
+// console.log(remove([3, 3, 3])); // [3]
 
 const square = [
 	[5, 5, 5],
@@ -78,15 +79,27 @@ const rotateAndRemove = input => {
 		return newSquare;
 	}, []);
 
-	const remove = array => array.filter((item, index) => [
+	const remove = array => array.every(i => i === array[0]) ? array.slice(2) : array.filter((item, index) => [
 		array.indexOf(Math.min(...array)),
 		array.indexOf(Math.max(...array))
 	].indexOf(index) < 0);
 
-	const decrease = square => rotate(square).map(row => remove(row));
-
-	return [...Array(input.length - 1)].reduce(square => decrease(square), input)[0][0];
+	return [...Array(input.length - 1)].reduce(square => rotate(square).map(row => remove(row)), input)[0][0];
 };
 
-console.log(rotateAndRemove(largeSquare));
-console.log(rotateAndRemove(square));
+// console.log(rotateAndRemove(largeSquare));
+// console.log(rotateAndRemove(square));
+// console.log(rotateAndRemove([
+// 	[13, 25, 38, 44, 52],
+// 	[61, 79, 82, 93, 18],
+// 	[24, 36, 47, 52, 62],
+// 	[77, 85, 95, 15, 25],
+// 	[36, 45, 53, 68, 71]
+// ]));
+// console.log(rotateAndRemove([
+// 	[50, 51, 51, 51, 51],
+// 	[51, 51, 50, 51, 51],
+// 	[50, 50, 51, 50, 51],
+// 	[51, 51, 51, 51, 51],
+// 	[51, 50, 49, 50, 50]
+// ]));
