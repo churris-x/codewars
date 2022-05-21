@@ -6,8 +6,8 @@
 	- rotate nxn														[x]
 	- invert rotation													[x]
 	- rotate n x m -> base rotating on row length						[x]
-	- rotate and remove nxn -> (n-2)x(n-2)								[ ]
-	- at the end 3x3 -> 3x1 -> [x, y, z] -> x							[ ]
+	- rotate and remove nxn -> (n-2)x(n-2)								[x]
+	- at the end 3x3 -> 3x1 -> [x, y, z] -> x							[x]
 */
 
 
@@ -24,9 +24,9 @@ const remove = array => array.filter((item, index) => [
 	array.indexOf(Math.max(...array))
 ].indexOf(index) < 0);
 
-console.log(remove([5, 8, 4, 5, 6])); // [5, 5, 6]
-console.log(remove([6, 8, 4, 5, 5])); // [6, 5, 5]
-console.log(remove([9, 2, 5, 8, 5, 2, 9])); // [5, 8, 5, 2, 9]
+// console.log(remove([5, 8, 4, 5, 6])); // [5, 5, 6]
+// console.log(remove([6, 8, 4, 5, 5])); // [6, 5, 5]
+// console.log(remove([9, 2, 5, 8, 5, 2, 9])); // [5, 8, 5, 2, 9]
 
 const square = [
 	[5, 5, 5],
@@ -59,3 +59,34 @@ const rotate = square => square.reduce((rSquare, currRow, index, array) => {
 // console.log(rotate(square));
 // console.log(rotate(largeSquare));
 // console.log(rotate(rectangle));
+
+const decrease = square => rotate(square).map(row => remove(row));
+
+// console.log(decrease(largeSquare));
+// console.log(decrease(decrease(largeSquare)));
+// console.log(decrease(decrease(decrease(largeSquare))));
+// console.log(decrease(decrease(decrease(decrease(largeSquare)))));
+
+const rotateAndRemove = input => {
+	const rotate = square => square.reduce((rSquare, currRow, index, array) => {
+		if (!index) return [...Array(array.length).keys()].map((row, i) => [array[index][array.length - 1 - i]]);
+
+		const newSquare = rSquare.map((row, i) => [...row, array[index][array.length - 1 - i]]);
+
+		// if rectangle remove leftover rows at the end
+		if (index + 1 === array.length && currRow.length < array.length) return newSquare.slice(array.length - currRow.length);
+		return newSquare;
+	}, []);
+
+	const remove = array => array.filter((item, index) => [
+		array.indexOf(Math.min(...array)),
+		array.indexOf(Math.max(...array))
+	].indexOf(index) < 0);
+
+	const decrease = square => rotate(square).map(row => remove(row));
+
+	return [...Array(input.length - 1)].reduce(square => decrease(square), input)[0][0];
+};
+
+console.log(rotateAndRemove(largeSquare));
+console.log(rotateAndRemove(square));
