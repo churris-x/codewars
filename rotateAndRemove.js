@@ -1,13 +1,13 @@
 /*
 	Battle plan:
-	- remove 1 of the lowest and 1 of the highest elements in an array 	[x]
-	- remove without changing order										[x]
-	- rotate 3x3 array of array											[x]
-	- rotate nxn														[x]
-	- invert rotation													[x]
-	- rotate n x m -> base rotating on row length						[x]
-	- rotate and remove nxn -> (n-2)x(n-2)								[x]
-	- at the end 3x3 -> 3x1 -> [x, y, z] -> x							[x]
+	- remove 1 of the lowest and 1 of the highest elements in an array  [x]
+	- remove without changing order                                     [x]
+	- rotate 3x3 array of array                                         [x]
+	- rotate nxn                                                        [x]
+	- invert rotation                                                   [x]
+	- rotate n x m -> base rotating on row length                       [x]
+	- rotate and remove nxn -> (n-2)x(n-2)                              [x]
+	- at the end 3x3 -> 3x1 -> [x, y, z] -> x                           [x]
 */
 
 
@@ -24,10 +24,10 @@ const remove = array => array.every(i => i === array[0]) ? array.slice(2) : arra
 	array.indexOf(Math.max(...array))
 ].indexOf(index) < 0);
 
-// console.log(remove([5, 8, 4, 5, 6])); // [5, 5, 6]
-// console.log(remove([6, 8, 4, 5, 5])); // [6, 5, 5]
-// console.log(remove([9, 2, 5, 8, 5, 2, 9])); // [5, 8, 5, 2, 9]
-// console.log(remove([3, 3, 3])); // [3]
+// console.log(remove([5, 8, 4, 5, 6]));          // [5, 5, 6]
+// console.log(remove([6, 8, 4, 5, 5]));          // [6, 5, 5]
+// console.log(remove([9, 2, 5, 8, 5, 2, 9]));    // [5, 8, 5, 2, 9]
+// console.log(remove([3, 3, 3]));                // [3]
 
 const square = [
 	[5, 5, 5],
