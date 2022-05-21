@@ -1,6 +1,7 @@
 /*
 	Battle plan:
 	- remove 1 of the lowest and 1 of the highest elements in an array 	[x]
+	- remove without changing order										[x]
 	- rotate 3x3 array of array											[x]
 	- rotate nxn														[x]
 	- invert rotation													[x]
@@ -10,10 +11,22 @@
 */
 
 
-const remove = array => array.sort((a, b) => a - b).slice(1, -1);
+const remove0 = array => array.sort((a, b) => a - b).slice(1, -1);
+const remove1 = array => {
+	const sort = [...array].sort((a, b) => a - b)
+	const remove = [array.indexOf(sort.pop()), array.indexOf(sort[0])]
+	return array.filter((item, index) => remove.indexOf(index) < 0);
+};
+const remove2 = array => array.filter(item => [...array].sort((a, b) => a - b).slice(1, -1).includes(item));
 
-// console.log(remove([5, 8, 4, 5, 6])); // [5, 5, 6]
-// console.log(remove([9, 2, 5, 8, 5, 2, 9])); // [2, 5, 5, 8, 9]
+const remove = array => array.filter((item, index) => [
+	array.indexOf(Math.min(...array)),
+	array.indexOf(Math.max(...array))
+].indexOf(index) < 0);
+
+console.log(remove([5, 8, 4, 5, 6])); // [5, 5, 6]
+console.log(remove([6, 8, 4, 5, 5])); // [6, 5, 5]
+console.log(remove([9, 2, 5, 8, 5, 2, 9])); // [5, 8, 5, 2, 9]
 
 const square = [
 	[5, 5, 5],
@@ -43,6 +56,6 @@ const rotate = square => square.reduce((rSquare, currRow, index, array) => {
 	return newSquare;
 }, []);
 
-console.log(rotate(square));
-console.log(rotate(largeSquare));
-console.log(rotate(rectangle));
+// console.log(rotate(square));
+// console.log(rotate(largeSquare));
+// console.log(rotate(rectangle));
