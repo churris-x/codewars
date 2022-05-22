@@ -72,10 +72,12 @@ const rotateAndRemove = input => {
 	const rotate = square => square.reduce((rSquare, currRow, index, array) => {
 		if (!index) return [...Array(array.length).keys()].map((row, i) => [array[index][array.length - 1 - i]]);
 
+		const isLast = index + 1 === array.length;
+		const isRectangle = currRow.length < array.length;
+
 		const newSquare = rSquare.map((row, i) => [...row, array[index][array.length - 1 - i]]);
 
-		// if rectangle remove leftover rows at the end
-		if (index + 1 === array.length && currRow.length < array.length) return newSquare.slice(array.length - currRow.length);
+		if (isLast && isRectangle) return newSquare.slice(array.length - currRow.length);
 		return newSquare;
 	}, []);
 
