@@ -15,3 +15,6 @@ const getFontColor = color => color
 
 // 1 => #F7DDCE, 2 => #2F577F
 const hexHash = (x, salt = 44) => '#' + ((x + salt + 1) * 2654435761).toString(16).slice(-6);
+
+
+[0, 1, 2, 3, 4, 5, 6].forEach(i => console.log(hexHash(i), getFontColor(hexHash(i))));
