@@ -194,10 +194,8 @@ const simplify2 = input => {
 };
 
 const simplify = poly => {
-	// get number or variable from a term respectively
 	const getNum = term => [...term].filter(i => '+-0123456789'.includes(i)).join('');
 	const getVar = term => [...term].filter(i => !'+-0123456789'.includes(i)).sort().join('');
-
 	const parse = num => {
 		switch (num) {
 			case '+': return '1';
@@ -212,6 +210,7 @@ const simplify = poly => {
 	const exp = `${'+-'.includes(poly[0]) ? '' : '+'}`.concat(poly)
 		// Add space before +- and split into terms: ['+3a', '-5ab']
 		.split('').map(i => '+-'.includes(i) ? ` ${i}` : i).join('').substring(1).split(' ')
+
 		// Reduce array into object, adding up equal variables: {x: 3, ab: -5}
 		.reduce((poly, term, index, array) => {
 			const isLast = index === array.length - 1;
@@ -224,10 +223,13 @@ const simplify = poly => {
 			if (isLast) return Object.entries(newPoly)
 			return newPoly;
 		}, {})
+
 		// Sort terms a > c > abc > xyz
 		.sort(([aChar], [bChar]) => aChar.length - bChar.length || aChar.localeCompare(bChar))
+
 		// Filter out variables with 0 and parse +1 / -1 into + / - : ['+3a', '-5ab']
 		.map(([char, num]) => !num ? '' : `${parse(num)}${char}`)
+
 		// '+3a-5ab'
 		.join('');
 
@@ -248,16 +250,8 @@ console.log(simplify("a+2a+4a-10a"), simplify2("a+2a+4a-10a"));
 console.log(simplify("a+2a+4a-8+12"), simplify2("a+2a+4a-8+12"));
 console.log(simplify("2xy-4yx"), simplify2("2xy-4yx"));
 
-// if ([0,1,2,3,4,5,6,7,8,9].indexOf(event.keyCode) >= 0) {
-// }
-
-// {
-// 	val
-// 	sign
-// 	count
-// }
 /*
-	terms
+	Terms
 	5x + 3
 	Coeficient variable, constant
 */

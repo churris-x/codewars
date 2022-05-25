@@ -89,19 +89,19 @@ const rotateAndRemove = input => {
 	return [...Array(input.length - 1)].reduce(square => rotate(square).map(row => remove(row)), input)[0][0];
 };
 
-// console.log(rotateAndRemove(largeSquare));
-// console.log(rotateAndRemove(square));
-// console.log(rotateAndRemove([
-// 	[13, 25, 38, 44, 52],
-// 	[61, 79, 82, 93, 18],
-// 	[24, 36, 47, 52, 62],
-// 	[77, 85, 95, 15, 25],
-// 	[36, 45, 53, 68, 71]
-// ]));
-// console.log(rotateAndRemove([
-// 	[50, 51, 51, 51, 51],
-// 	[51, 51, 50, 51, 51],
-// 	[50, 50, 51, 50, 51],
-// 	[51, 51, 51, 51, 51],
-// 	[51, 50, 49, 50, 50]
-// ]));
+console.log(rotateAndRemove(largeSquare));
+console.log(rotateAndRemove(square));
+console.log(rotateAndRemove([
+	[13, 25, 38, 44, 52],
+	[61, 79, 82, 93, 18],
+	[24, 36, 47, 52, 62],
+	[77, 85, 95, 15, 25],
+	[36, 45, 53, 68, 71]
+]));
+console.log(rotateAndRemove([
+	[50, 51, 51, 51, 51],
+	[51, 51, 50, 51, 51],
+	[50, 50, 51, 50, 51],
+	[51, 51, 51, 51, 51],
+	[51, 50, 49, 50, 50]
+]));
