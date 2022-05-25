@@ -8,5 +8,7 @@ const maskify1 = input => {
 
 const maskify = input => input.slice(-4).padStart(input.length, '#');
 
+const maskifyB = (input, char) => input.slice(-4).padStart(input.length, char || '*');
+
 console.log(maskify('ld'))
 console.log(maskify('4556364607935616'))
