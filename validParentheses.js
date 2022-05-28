@@ -6,15 +6,25 @@
 
 */
 
-const validParentheses = string => string
+const validParentheses0 = string => [...string]
 	.reduce((sum, current) => {
-		current.replaceAll('()', '')
-		return sum
+		return sum.concat(current).replaceAll('()', '')
 	})
-// .split('')
+
+const reduceParentheses = string => [...string].reduce((sum, current) => sum.concat(current).replaceAll('()', ''));
+
+const validParentheses = string => ![...string]
+	.reduce((sum, current) => sum.concat(current).replaceAll('()', ''), '')
+	// .reduce((sum, current) => sum.concat(current).replace(/\(\)/g, ''), '')
+	.length;
 
 
-console.log('result', validParentheses('()'));
-console.log('result', validParentheses(')(()))'));
-console.log('result', validParentheses('('));
-console.log('result', validParentheses('(())((()())())'));
+
+console.log('\'\'', validParentheses(''));
+console.log('()', validParentheses('()'));
+console.log('())', validParentheses('())'));
+console.log(')(()))', validParentheses(')(()))'));
+console.log('(', validParentheses('('));
+console.log(')', validParentheses(')'));
+console.log('(())((()())())', validParentheses('(())((()())())'));
+console.log('())(', validParentheses('())('));
