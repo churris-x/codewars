@@ -8,7 +8,7 @@ const parseInt0 = string => {
 		fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17, eighteen: 18,
 		nineteen: 19, twenty: 20, thirty: 30, forty: 40, fifty: 50, sixty: 60,
 		seventy: 70, eighty: 80, ninety: 90,
-	}; 
+	};
 	const places = {
 		hundred: 100,
 		thousand: 1000,
@@ -16,15 +16,15 @@ const parseInt0 = string => {
 	};
 
 	return string
-	.split(' ').flatMap(i => i.split('-'))
-	.reduce((sum, curr, index, array)=> {
-		const digit = digits[curr];
-		const place = places[curr];
+		.split(' ').flatMap(i => i.split('-'))
+		.reduce((sum, curr) => {
+			const digit = digits[curr];
+			const place = places[curr];
 
-		if (digit) return sum + digit;
-		if (place) return  place * sum;
-		return sum;
-	}, 0);
+			if (digit) return sum + digit;
+			if (place) return place * sum;
+			return sum;
+		}, 0);
 };
 
 const parseInt1 = string => {
@@ -34,23 +34,23 @@ const parseInt1 = string => {
 		fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17, eighteen: 18,
 		nineteen: 19, twenty: 20, thirty: 30, forty: 40, fifty: 50, sixty: 60,
 		seventy: 70, eighty: 80, ninety: 90,
-	}; 
+	};
 	const places = {
 		hundred: 100,
 		thousand: 1000,
 		million: 1000000,
 	};
-	
-	const parse = string => string
-	.split(' ').flatMap(i => i.split('-'))
-	.reduce((sum, curr, index, array)=> {
-		const digit = digits[curr];
-		const place = places[curr];
 
-		if (digit) return sum + digit;
-		if (place) return  place * sum;
-		return sum;
-	}, 0);
+	const parse = string => string
+		.split(' ').flatMap(i => i.split('-'))
+		.reduce((sum, curr) => {
+			const digit = digits[curr];
+			const place = places[curr];
+
+			if (digit) return sum + digit;
+			if (place) return place * sum;
+			return sum;
+		}, 0);
 
 	return string.split('thousand').reduce((sum, curr, index) => {
 		const total = parse(`${curr} thousand`);
@@ -66,23 +66,23 @@ const parseInt = string => {
 		fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17, eighteen: 18,
 		nineteen: 19, twenty: 20, thirty: 30, forty: 40, fifty: 50, sixty: 60,
 		seventy: 70, eighty: 80, ninety: 90,
-	}; 
+	};
 	const places = {
 		hundred: 100,
 		thousand: 1000,
 		million: 1000000,
 	};
-	
-	const parse = string => string
-	.split('').map(i => i === '-' ? ' ' : i).join('')
-	.split(' ').reduce((sum, curr, index, array)=> {
-		const digit = digits[curr];
-		const place = places[curr];
 
-		if (digit) return sum + digit;
-		if (place) return  place * sum;
-		return sum;
-	}, 0);
+	const parse = string => string
+		.split('').map(i => i === '-' ? ' ' : i).join('')
+		.split(' ').reduce((sum, curr) => {
+			const digit = digits[curr];
+			const place = places[curr];
+
+			if (digit) return sum + digit;
+			if (place) return place * sum;
+			return sum;
+		}, 0);
 
 	return string.split('thousand').reduce((sum, curr, index) => {
 		const total = parse(curr);
