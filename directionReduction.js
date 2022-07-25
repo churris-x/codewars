@@ -6,16 +6,24 @@
 */
 
 const directionReduce = headings => headings.reduce((previous, current) => {
-	// const [prevHeadings, last] = [sum.slice(0, -1), sum.slice(-1)];
-	previous.pop();
 
-	const x = ['EAST', 'WEST'];
-	const y = ['NORTH', 'SOUTH'];
+	const value = {
+		'NORTH': 1,
+		'SOUTH': -1,
+		'EAST': 2,
+		'WEST': -2,
+	}
 
-});
+	const prevHeading = previous.pop();
 
+	if (value[prevHeading] + value[current] === 0) return previous;
 
-const example = ['NORTH', 'SOUTH', 'SOUTH', 'EAST', 'WEST', 'NORTH', 'WEST'];
-// expected: ['WEST']
+	return previous.concat(prevHeading, current);
+}, ['']).slice(1);
 
-console.log()
+const example = ['NORTH', 'SOUTH', 'SOUTH', 'EAST', 'WEST', 'NORTH', 'WEST']; // expected: ['WEST']
+
+console.log(directionReduce(example));
+console.log(directionReduce(["NORTH", "WEST", "SOUTH", "EAST"])); // ["NORTH", "WEST", "SOUTH", "EAST"]
+console.log(directionReduce(["NORTH", "SOUTH", "EAST", "WEST", "EAST", "WEST"])); // []
+console.log(directionReduce(["EAST","EAST","WEST","NORTH","WEST","EAST","EAST","SOUTH","NORTH","WEST"])); // [ 'EAST', 'NORTH' ]
