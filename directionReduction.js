@@ -5,7 +5,7 @@
 	- a cancelation may cause another cancelation
 */
 
-const directionReduce = headings => headings.reduce((previous, current) => {
+const directionReduce0 = headings => headings.reduce((previous, current) => {
 
 	const value = {
 		'NORTH': 1,
@@ -20,6 +20,15 @@ const directionReduce = headings => headings.reduce((previous, current) => {
 
 	return previous.concat(prevHeading, current);
 }, ['']).slice(1);
+
+const directionReduce = headings => headings.reduce((previous, current) => 
+	['NORTHSOUTH', 'EASTWEST'].includes(
+		[previous.slice(-1), current].sort().join('')
+	) 
+	? previous.slice(0, -1)
+	: previous.concat(current)
+, []);
+
 
 const example = ['NORTH', 'SOUTH', 'SOUTH', 'EAST', 'WEST', 'NORTH', 'WEST']; // expected: ['WEST']
 
