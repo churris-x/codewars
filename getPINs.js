@@ -41,15 +41,17 @@ const getPins = pin => {
 	const totalComb = possibleKeys.reduce((product, current) => product * current.length, 1);
 
 	const combinations = [...Array(totalComb).keys()].map(i => possibleKeys
-		.reduce((s, c) => s.concat(c[ ~~(i/(c.length/totalComb))  ]))
+		.reduce((s, c) => {
+			console.log(c[~~(i/(totalComb/c.length))])
+			return s.concat(c[ ~~(i/(totalComb/c.length))  ])
+		}, [])
 	);
 
-	// return combinations;
-	return possibleKeys.reduce((s, c) => s.concat(c[ ~~(0/(c.length/totalComb))  ]))
+	return combinations;
 };
 
 // console.log(getPins('8'));
 // console.log(getPins('11'));
-// console.log(getPins('10'));
-console.log(getPins('010'));
+console.log(getPins('10'));
+// console.log(getPins('010'));
 
